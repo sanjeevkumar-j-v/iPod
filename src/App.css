@@ -88,8 +88,8 @@ border: 4px solid #555555;
     list-style-type: none;
     padding: 5px;
 }
-.screen li:hover{
-    background-color: rgb(192, 76, 56);
+.screen:hover{
+    cursor: none;
 }
 .active{
     background-color: rgb(196, 43, 16);

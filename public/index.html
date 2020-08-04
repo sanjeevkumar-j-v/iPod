@@ -2,19 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -24,7 +23,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>iPod</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +38,79 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/374756/zingtouch-1.0.1.min.js"></script>
+    <script>
+
+
+        var currentAngle = 15;
+        // document.getElementById('rotatable').style.transform = 'rotate(15deg)';
+
+        var target = document.getElementById('keys');
+        var region = new ZingTouch.Region(target);
+
+        var element = document.querySelector('.play');
+        element.addEventListener('click', selectNext);
+        var lis = document.querySelectorAll('.screen li');
+        var activePos = 0;
+        function selectNext() {
+            lis[activePos].classList.remove('active');
+
+            if(lis.length === activePos+1)
+                activePos=0;
+            else
+                activePos+=1;
+         
+            lis[activePos].classList.add('active');
+        }
+        function selectPrev() {
+            lis[activePos].classList.remove('active');
+
+            if(0 === activePos)
+                activePos=lis.length-1;
+            else
+                activePos-=1;
+         
+            lis[activePos].classList.add('active');
+        }
+
+        var previousAngle = 0;
+
+        region.bind(target, 'rotate', function(e) {
+        // var rotatable = document.getElementById('rotatable');
+        previousAngle += e.detail.distanceFromLast;
+            if(previousAngle>15){
+                selectNext();
+                previousAngle=0;
+            }else if(previousAngle<-15){
+                selectPrev();
+                previousAngle=0;
+            }
+        // currentAngle += e.detail.distanceFromLast;
+
+        // rotatable.style.transform = 'rotate(' + currentAngle + 'deg)';
+            console.log(e.detail.distanceFromLast ,previousAngle,  currentAngle);
+        // setOutput([
+        //     ['Gesture', 'Rotate'],
+        //     ['angle', Math.floor(e.detail.angle) + "°"],
+        //     ['distanceFromOrigin', Math.floor(e.detail.distanceFromOrigin) + "°"],
+        //     ['distanceFromLast', Math.floor(e.detail.distanceFromLast) + "°"]
+        // ]);
+
+        });
+
+        // function setOutput(data) {
+        // var outputStr = "> ";
+        // for (var i = 0; i < data.length; i++) {
+        //     outputStr += data[i][0] + ": " + data[i][1] + ((i === data.length - 1) ? '' : ' , ');
+        // }
+        // var output = document.getElementById('output');
+        // output.innerHTML = outputStr;
+        // console.log(outputStr);
+        // }
+    </script>
+    
   </body>
 </html>
