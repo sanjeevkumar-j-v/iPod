@@ -27,6 +27,31 @@ class App extends React.Component {
     }
 
    
+    changeListToNext = () => {
+        var listAvailable = true;
+        var list = [];
+        try {
+            list = eval(this.state.currentList[this.state.activePos]);
+        } catch (err) {
+            listAvailable = false;
+        }
+        this.lis = document.querySelectorAll('.screen li');
+
+        if (this.lis.length!==0 && listAvailable){
+            this.setState({
+                currentPage: this.state.currentList[this.state.activePos],
+                currentList: list,
+                activePos: 0
+            });
+            this.route += this.state.currentList[this.state.activePos] + '/';
+        }
+        // document.querySelectorAll('.screen li')[0].classList.add('active');
+
+        // console.log('current page , list : ', this.state.currentPage, this.state.currentList);
+        console.log('route : ', this.route);
+    }
+
+   
     rotate = () => {
 
         var target = document.getElementById('keys');
@@ -84,7 +109,7 @@ class App extends React.Component {
             <div className="navigator" onMouseOver={this.rotate}>
                 <div id="keys">
                     
-                    <div className="menu-btn">
+                    <div className="menu-btn" >
                         MENU
                     </div>
                     <div className="fwd">
@@ -97,7 +122,7 @@ class App extends React.Component {
                       <FontAwesomeIcon icon={faPlay} />           
                     </div>
                 </div>
-                <div className="play"  >
+                <div className="play"  onClick={this.changeListToNext}>
                 </div>
                 
             </div>
