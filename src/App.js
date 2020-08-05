@@ -51,7 +51,25 @@ class App extends React.Component {
         console.log('route : ', this.route);
     }
 
-   
+    changeListToBack = () => {
+        var route = this.route;
+
+        var pos = route.indexOf(this.state.currentPage);
+        route = route.slice(0, pos-1);
+        var prev = route.slice(route.lastIndexOf('/')+1);
+        console.log(this.route);
+        console.log('inside back() \n prev : ', prev);
+        console.log('route : ', route);
+
+
+        if (prev.length > 0){
+            // this.route = route.slice(0, route.lastIndexOf('/')+1);
+            this.route = route+'/';
+            console.log(this.route);
+            this.setState({ currentPage: prev, currentList: eval(prev), activePos: (eval(prev)).indexOf(this.state.currentPage) });
+        }
+
+    }
     rotate = () => {
 
         var target = document.getElementById('keys');
@@ -109,7 +127,7 @@ class App extends React.Component {
             <div className="navigator" onMouseOver={this.rotate}>
                 <div id="keys">
                     
-                    <div className="menu-btn" >
+                    <div className="menu-btn" onClick={this.changeListToBack}>
                         MENU
                     </div>
                     <div className="fwd">
