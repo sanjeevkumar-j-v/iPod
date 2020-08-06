@@ -19,13 +19,13 @@ class App extends React.Component {
         this.state = {
             currentPage: 'home',
             currentList: home,
-            activePos: 0,
-            overCount: 0
+            activePos: 0            
         }
         this.lis = document.querySelectorAll('.screen li');
         this.route = '/home/';
+        this.Lists = [home, music, game, settings, songs, artists, albums, playlists];
+        this.binded = false;
     }
-
    
     changeListToNext = () => {
         var listAvailable = true;
@@ -57,16 +57,19 @@ class App extends React.Component {
         var pos = route.indexOf(this.state.currentPage);
         route = route.slice(0, pos-1);
         var prev = route.slice(route.lastIndexOf('/')+1);
-        console.log(this.route);
-        console.log('inside back() \n prev : ', prev);
-        console.log('route : ', route);
+        // console.log(this.route);
+        // console.log('inside back() \n prev : ', prev);
+        // console.log('route : ', route);
 
 
         if (prev.length > 0){
             // this.route = route.slice(0, route.lastIndexOf('/')+1);
             this.route = route+'/';
             console.log(this.route);
-            this.setState({ currentPage: prev, currentList: eval(prev), activePos: (eval(prev)).indexOf(this.state.currentPage) });
+            this.setState({ 
+                currentPage: prev, 
+                currentList: eval(prev), activePos: (eval(prev)).indexOf(this.state.currentPage) 
+            });
         }
 
     }
@@ -76,14 +79,15 @@ class App extends React.Component {
         var region = new ZingTouch.Region(target);
         var previousAngle = 0;
 
-        this.state.overCount += 1;        
-        if(this.state.overCount < 2){
+                
+        if( !this.binded ){
+            this.binded = true;
             region.bind(target, 'rotate', function(e) {
                 previousAngle += e.detail.distanceFromLast;
-                if(previousAngle>15){
+                if(previousAngle>25){
                     selectNext();
                     previousAngle=0;
-                }else if(previousAngle<-15){
+                }else if(previousAngle<-25){
                     selectPrev();
                     previousAngle=0;
                 }
