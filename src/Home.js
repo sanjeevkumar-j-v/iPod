@@ -20,9 +20,13 @@ class Home extends React.Component {
         //             })}
         //         </div>
         //         <div className="right">
-                    <div style={{ fontSize: 100 }}>
+                    <div >
                         {/* {this.props.state.activePos} */}
-                        < FontAwesomeIcon icon={faHome} />
+                        {/* < FontAwesomeIcon icon={faHome} /> */}
+                        <div className="home-background"> 
+                          
+                        </div>
+                      
                     </div>
             //     </div>
             // </div>

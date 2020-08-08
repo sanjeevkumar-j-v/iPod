@@ -3,6 +3,7 @@ import Home from './Home';
 import Game from './Game'
 import Settings from './Settings';
 import Music from './Music';
+// import Background from './assets/videos/home-bg.wmv';
 
 
 class Screen extends React.Component {

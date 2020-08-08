@@ -3,6 +3,8 @@ import Screen from './Screen';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faForward, faBackward, faPlay } from '@fortawesome/free-solid-svg-icons'
 import ZingTouch from 'zingtouch';
+import video from "./assets/videos/blue.mp4"
+
 
 const home = ['music', 'game', 'settings'];
 const music = ['songs', 'albums', 'artists', 'playlists'];
@@ -45,10 +47,8 @@ class App extends React.Component {
             });
             this.route += this.state.currentList[this.state.activePos] + '/';
         }
-        // document.querySelectorAll('.screen li')[0].classList.add('active');
 
-        // console.log('current page , list : ', this.state.currentPage, this.state.currentList);
-        console.log('route : ', this.route);
+        // console.log('route : ', this.route);
     }
 
     changeListToBack = () => {
@@ -57,13 +57,8 @@ class App extends React.Component {
         var pos = route.indexOf(this.state.currentPage);
         route = route.slice(0, pos-1);
         var prev = route.slice(route.lastIndexOf('/')+1);
-        // console.log(this.route);
-        // console.log('inside back() \n prev : ', prev);
-        // console.log('route : ', route);
-
 
         if (prev.length > 0){
-            // this.route = route.slice(0, route.lastIndexOf('/')+1);
             this.route = route+'/';
             console.log(this.route);
             this.setState({ 
@@ -123,15 +118,21 @@ class App extends React.Component {
   render () {
     //   console.log('rendered');
     return (
- 
+        <div>
+            <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400&display=swap" rel="stylesheet"></link>
+            <video autoPlay loop>
+                <source src={video} type="video/mp4" />
+            </video>
+
         <div className="main">
 
+            
             <Screen state={this.state} />
 
             <div className="navigator" onMouseOver={this.rotate}>
                 <div id="keys">
                     
-                    <div className="menu-btn" onClick={this.changeListToBack}>
+                    <div className="menu-btn" onTouchStart={this.changeListToBack} onClick={this.changeListToBack}>
                         MENU
                     </div>
                     <div className="fwd">
@@ -149,7 +150,7 @@ class App extends React.Component {
                 
             </div>
         </div>
-    
+        </div>
       );
   }
 }
