@@ -4,37 +4,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faForward, faBackward, faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import ZingTouch from 'zingtouch';
 
-const home = ['music' , 'video' , 'game' ,'settings', 'about'];
-const music = ['songs', 'albums', 'artists', 'playlists'];
-const game = [], settings = [], about = [];
-const songs = ['Alan Walker - Faded','Eminem - Rap God', 'Luis Fonsi - Despacito ft. Daddy Yankee', 'Maroon 5 - Girls Like You ft. Cardi B', 'Sia - Cheap Thrills'];
-const artists = ['imagine dragons', 'eminem'];
-const albums = ['love', 'action'];
-const playlists = ['rap', 'party'];
+const Home = ['Music' , 'Game' ,'Settings', 'About'];
+const Music = ['Songs', 'Artists'];
+const Game = [], Settings = [], About = [];
+const Songs = ['Eminem - Rap God', 'Imagine Dragons - Thunder', 'Luis Fonsi - Despacito ft. Daddy Yankee', 'Maroon 5 - Girls Like You ft. Cardi B', 'Sia - Cheap Thrills'];
+const Artists = ['Imagine dragons', 'Eminem', 'Luis Fonsi', 'Maroon 5', 'Sia'];
+
 
 class App extends React.Component {
 
     constructor () {
         super();
         this.state = {
-            currentPage: 'home',
-            currentList: home,
+            currentPage: 'Home',
+            currentList: Home,
             activePos: 0,
             play: false,
-            song: songs[0]
+            song: Songs[0]
 
         }
         this.lis = document.querySelectorAll('.screen li');
-        this.route = '/home/';
-        // this.Lists = [home, music, game, settings, songs, artists, albums, playlists];
+        this.route = '/Home/';
+        this.Lists = [Home, Music, Game, Settings, Songs, Artists, About];
         this.binded = false;
+        this.aud = document.querySelector('audio');
+
     }
    
     changeListToNext = () => {
         var listAvailable = true;
         var list = [];
+        let currentPage = this.state.currentList[this.state.activePos];
         try {
-            list = eval(this.state.currentList[this.state.activePos]);
+            list = eval(currentPage);
         } catch (err) {
             listAvailable = false;
         }
@@ -42,11 +44,11 @@ class App extends React.Component {
 
         if (this.lis.length!==0 && listAvailable){
             this.setState({
-                currentPage: this.state.currentList[this.state.activePos],
+                currentPage,
                 currentList: list,
                 activePos: 0
             });
-            this.route += this.state.currentList[this.state.activePos] + '/';
+            this.route += currentPage + '/';
         }
 
         // console.log('route : ', this.route);
@@ -64,25 +66,68 @@ class App extends React.Component {
             console.log(this.route);
             this.setState({ 
                 currentPage: prev, 
-                currentList: eval(prev), activePos: (eval(prev)).indexOf(this.state.currentPage) 
+                currentList: eval(prev), 
+                activePos: (eval(prev)).indexOf(this.state.currentPage) 
             });
         }
 
     }
     TogglePlayPauseMusic = () => {
-        var aud = document.querySelector('audio');
+        this.aud = document.querySelector('audio');
         if (!this.state.play){
-            aud.play();
+            this.aud.play();
             this.setState({
                 play: true
             })
         }
         else {
-            aud.pause();
+            this.aud.pause();
             this.setState({
                 play: false
             })
         }
+    }
+    SelectMusic = () => {
+        this.setState({
+            song: Songs[this.state.activePos],
+            play: false
+        }, () => {
+            this.aud = document.querySelector('audio');
+            this.aud.src = process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3';
+            this.TogglePlayPauseMusic();
+        })
+    }
+    PlayNext = () => {
+        let currentIndex = Songs.indexOf(this.state.song);
+        let nextIndex = currentIndex+1;
+        if (nextIndex === Songs.length){
+            nextIndex = 0;
+        }
+        
+        this.setState({
+            song: Songs[nextIndex],
+            play: false
+        }, () => {
+            this.aud = document.querySelector('audio');
+            this.aud.src = process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3';
+            this.TogglePlayPauseMusic();
+        })
+    }
+    PlayPrevious = () => {
+        let currentIndex = Songs.indexOf(this.state.song);
+        let prevIndex = currentIndex-1;
+        if (prevIndex === -1){
+            prevIndex = Songs.length-1;
+        }
+        
+        this.setState({
+            song: Songs[prevIndex],
+            play: false
+        }, () => {
+            this.aud = document.querySelector('audio');
+            this.aud.src = process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3';
+            this.TogglePlayPauseMusic();
+        })
     }
     rotate = () => {
 
@@ -133,15 +178,12 @@ class App extends React.Component {
 
   render () {
     //   console.log('rendered');
-    const song = 'Rap God.mp3';
     return (
         <div>
         <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400&display=swap" rel="stylesheet"></link>
         <div className="main">
 
-            <audio>
-                <source src={process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3'}></source>
-            </audio>
+            <audio src={process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3'} />
                 
             <Screen state={this.state} />
 
@@ -152,10 +194,10 @@ class App extends React.Component {
                         MENU
                     </div>
                     <div className="fwd">
-                        <FontAwesomeIcon icon={faForward} onClick={this.ActivateNext}/>
+                        <FontAwesomeIcon icon={faForward} onClick={this.PlayNext}/>
                     </div>
                     <div className="bkd">
-                      <FontAwesomeIcon icon={faBackward} onClick={this.ActivatePrev}/>       
+                      <FontAwesomeIcon icon={faBackward} onClick={this.PlayPrevious}/>       
                     </div>
                     <div className="play-pause">
                         { this.state.play 
@@ -164,7 +206,14 @@ class App extends React.Component {
                         }
                     </div>
                 </div>
-                <div className="play"  onClick={this.changeListToNext}>
+                <div 
+                    className="play" 
+                    onClick={
+                        this.state.currentPage === 'Songs'
+                        ? this.SelectMusic
+                        : this.changeListToNext
+                        
+                    }>
                 </div>
                 
             </div>

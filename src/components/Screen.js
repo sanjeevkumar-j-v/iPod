@@ -4,6 +4,7 @@ import Game from './Game'
 import Settings from './Settings';
 import Music from './Music';
 import About from './About';
+import Songs from './Songs';
 // import Background from './assets/videos/home-bg.wmv';
 
 
@@ -11,13 +12,20 @@ class Screen extends React.Component {
 
    
   render () {
+      const state = this.props.state;
     return (
            <div className="screen">
                 <div className="left">
                     <div id='title' > iPod</div>
-                    {this.props.state.currentList.map((item) => {
-                        if (this.props.state.activePos === this.props.state.currentList.indexOf(item) )
-                            return <li className='active'> {item} <span style={{ position:'absolute', right: 140}}>&gt;</span> </li>
+                    {state.currentList.map((item) => {
+                        if (state.currentPage==='Songs'){
+                            return null
+                        }
+                        if (state.activePos === state.currentList.indexOf(item) )
+                            return <li className='active'> 
+                                        {item} 
+                                        <span style={{ position:'absolute', right: 140}}>&gt;</span> 
+                                    </li>
                         else
                             return <li > {item} </li>
 
@@ -25,11 +33,12 @@ class Screen extends React.Component {
                 </div>
                 <div className="right">
                     <div >
-                        {this.props.state.currentPage==='home'?<Home state={this.props.state} /> : null}
-                        {this.props.state.currentPage==='music'?<Music  state={this.props.state} /> : null}
-                        {this.props.state.currentPage==='game'?<Game  state={this.props.state} /> : null}
-                        {this.props.state.currentPage==='settings'?<Settings state={this.props.state} /> : null}
-                        {this.props.state.currentPage==='about'?<About state={this.props.state} /> : null}
+                        {state.currentPage==='Home'?<Home state={state} /> : null}
+                        {state.currentPage==='Music'?<Music  state={state} /> : null}
+                        {state.currentPage==='Game'?<Game  state={state} /> : null}
+                        {state.currentPage==='Settings'?<Settings state={state} /> : null}
+                        {state.currentPage==='About'?<About state={state} /> : null}
+                        {state.currentPage==='Songs'?<Songs state={state} /> : null}
 
                        
                     </div>
