@@ -1,18 +1,16 @@
 import React from 'react';
 import Screen from './components/Screen';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faForward, faBackward, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faForward, faBackward, faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import ZingTouch from 'zingtouch';
-import video from "./assets/videos/blue.mp4"
-
 
 const home = ['music' , 'video' , 'game' ,'settings', 'about'];
 const music = ['songs', 'albums', 'artists', 'playlists'];
 const game = [], settings = [], about = [];
-// const songs = ['thunder', 'cheap thrills', 'rap god'];
-// const artists = ['imagine dragons', 'eminem'];
-// const albums = ['love', 'action'];
-// const playlists = ['rap', 'party'];
+const songs = ['Alan Walker - Faded','Eminem - Rap God', 'Luis Fonsi - Despacito ft. Daddy Yankee', 'Maroon 5 - Girls Like You ft. Cardi B', 'Sia - Cheap Thrills'];
+const artists = ['imagine dragons', 'eminem'];
+const albums = ['love', 'action'];
+const playlists = ['rap', 'party'];
 
 class App extends React.Component {
 
@@ -21,8 +19,10 @@ class App extends React.Component {
         this.state = {
             currentPage: 'home',
             currentList: home,
-            activePos: 0  
-                      
+            activePos: 0,
+            play: false,
+            song: songs[0]
+
         }
         this.lis = document.querySelectorAll('.screen li');
         this.route = '/home/';
@@ -68,6 +68,21 @@ class App extends React.Component {
             });
         }
 
+    }
+    TogglePlayPauseMusic = () => {
+        var aud = document.querySelector('audio');
+        if (!this.state.play){
+            aud.play();
+            this.setState({
+                play: true
+            })
+        }
+        else {
+            aud.pause();
+            this.setState({
+                play: false
+            })
+        }
     }
     rotate = () => {
 
@@ -118,16 +133,16 @@ class App extends React.Component {
 
   render () {
     //   console.log('rendered');
+    const song = 'Rap God.mp3';
     return (
         <div>
-            <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400&display=swap" rel="stylesheet"></link>
-            {/* <video autoPlay loop>
-                <source src={video} type="video/mp4" />
-            </video> */}
-
+        <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400&display=swap" rel="stylesheet"></link>
         <div className="main">
 
-            
+            <audio>
+                <source src={process.env.PUBLIC_URL + '/Audios/' + this.state.song +'.mp3'}></source>
+            </audio>
+                
             <Screen state={this.state} />
 
             <div className="navigator" onMouseOver={this.rotate}>
@@ -143,7 +158,10 @@ class App extends React.Component {
                       <FontAwesomeIcon icon={faBackward} onClick={this.ActivatePrev}/>       
                     </div>
                     <div className="play-pause">
-                      <FontAwesomeIcon icon={faPlay} />           
+                        { this.state.play 
+                            ? <FontAwesomeIcon icon={faPause} onClick={this.TogglePlayPauseMusic}/> 
+                            : <FontAwesomeIcon icon={faPlay} onClick={this.TogglePlayPauseMusic}/>
+                        }
                     </div>
                 </div>
                 <div className="play"  onClick={this.changeListToNext}>
