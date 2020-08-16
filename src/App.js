@@ -1,18 +1,18 @@
 import React from 'react';
-import Screen from './Screen';
+import Screen from './components/Screen';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faForward, faBackward, faPlay } from '@fortawesome/free-solid-svg-icons'
 import ZingTouch from 'zingtouch';
 import video from "./assets/videos/blue.mp4"
 
 
-const home = ['music', 'game', 'settings'];
+const home = ['music' , 'video' , 'game' ,'settings', 'about'];
 const music = ['songs', 'albums', 'artists', 'playlists'];
-const game = [], settings = [];
-const songs = ['thunder', 'cheap thrills', 'rap god'];
-const artists = ['imagine dragons', 'eminem'];
-const albums = ['love', 'action'];
-const playlists = ['rap', 'party'];
+const game = [], settings = [], about = [];
+// const songs = ['thunder', 'cheap thrills', 'rap god'];
+// const artists = ['imagine dragons', 'eminem'];
+// const albums = ['love', 'action'];
+// const playlists = ['rap', 'party'];
 
 class App extends React.Component {
 
@@ -21,11 +21,12 @@ class App extends React.Component {
         this.state = {
             currentPage: 'home',
             currentList: home,
-            activePos: 0            
+            activePos: 0  
+                      
         }
         this.lis = document.querySelectorAll('.screen li');
         this.route = '/home/';
-        this.Lists = [home, music, game, settings, songs, artists, albums, playlists];
+        // this.Lists = [home, music, game, settings, songs, artists, albums, playlists];
         this.binded = false;
     }
    
@@ -120,9 +121,9 @@ class App extends React.Component {
     return (
         <div>
             <link href="https://fonts.googleapis.com/css2?family=Amaranth:wght@400&display=swap" rel="stylesheet"></link>
-            <video autoPlay loop>
+            {/* <video autoPlay loop>
                 <source src={video} type="video/mp4" />
-            </video>
+            </video> */}
 
         <div className="main">
 
