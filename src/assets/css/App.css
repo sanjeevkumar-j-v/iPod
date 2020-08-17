@@ -139,7 +139,7 @@ body{
 }
 
 .left {
-    /* background-color: black;   */
+    box-shadow: 10px 0px 20px rgb(0, 0, 0);
 }
 .right {
     color: #00a6ff;

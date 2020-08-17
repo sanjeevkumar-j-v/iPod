@@ -104,7 +104,7 @@ class App extends React.Component {
         this.lis = document.querySelectorAll('.screen li');
         if (this.lis.length!==0 && listAvailable){
             this.setState({
-                CurrentPage: selectedItem,
+                currentPage: selectedItem,
                 currentList: list,
                 activePos: 0
             });
