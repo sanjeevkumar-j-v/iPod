@@ -4,17 +4,12 @@ import { faMusic } from '@fortawesome/free-solid-svg-icons'
 
 
 class Music extends React.Component {
-
-   
+ 
   render () {
     return (
-
-        <div style={{ fontSize: 100 }}>
-            {/* {this.props.state.activePos} */}
+        <div className="bigger">
             < FontAwesomeIcon icon={faMusic} />
         </div>
-          
-    
       );
   }
 }

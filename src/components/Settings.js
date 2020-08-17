@@ -5,16 +5,12 @@ import { faTools } from '@fortawesome/free-solid-svg-icons'
 
 class Settings extends React.Component {
 
-   
   render () {
     return (
-
-        <div style={{ fontSize: 100 }} className="full-screen">
+        <div className="full-screen bigger">
             {/* {this.props.state.activePos} */}
             < FontAwesomeIcon icon={faTools} />
         </div>
-          
-    
       );
   }
 }

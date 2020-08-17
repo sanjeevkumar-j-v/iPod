@@ -1,51 +1,52 @@
 import React from 'react';
+// Subcomponents of screen
 import Home from './Home';
 import Game from './Game'
 import Settings from './Settings';
 import Music from './Music';
 import About from './About';
 import Songs from './Songs';
-// import Background from './assets/videos/home-bg.wmv';
 
 
 class Screen extends React.Component {
-
    
   render () {
-      const state = this.props.state;
+    const state = this.props.state;
     return (
-           <div className="screen">
-                <div className="left">
-                    <div id='title' > iPod</div>
-                    {state.currentList.map((item) => {
-                        if (state.currentPage==='Songs'){
-                            return null
-                        }
-                        if (state.activePos === state.currentList.indexOf(item) )
-                            return <li className='active'> 
-                                        {item} 
-                                        <span style={{ position:'absolute', right: 140}}>&gt;</span> 
-                                    </li>
-                        else
-                            return <li > {item} </li>
+        <div className="screen">
 
-                    })}
-                </div>
-                <div className="right">
-                    <div >
-                        {state.currentPage==='Home'?<Home state={state} /> : null}
-                        {state.currentPage==='Music'?<Music  state={state} /> : null}
-                        {state.currentPage==='Game'?<Game  state={state} /> : null}
-                        {state.currentPage==='Settings'?<Settings state={state} /> : null}
-                        {state.currentPage==='About'?<About state={state} /> : null}
-                        {state.currentPage==='Songs'?<Songs state={state} /> : null}
+            {/* Left portion of the screen for rendering lists items of curret page */}
+            <div className="left">
+                <div id='title' > iPod</div>
+                {state.currentList.map((item, index) => {
+                    if (state.currentPage==='Songs'){
+                        return null
+                    }
+                    if (state.activePos === index ) {
+                        return <li className='active' key={index}> 
+                                    {item} 
+                                    <span style={{ position:'absolute', right: 140}}>&gt;</span> 
+                                </li>
+                    } else {
+                        return <li key={index}> {item} </li>
+                    }
+                })}
+            </div>
 
-                       
-                    </div>
+            {/* Right portion of the screen */}
+            <div className="right">
+                <div >
+                    {/* Displays the subcomponent of screen based on */}
+                    {state.currentPage==='Home'     ? <Home />     : null}
+                    {state.currentPage==='Music'    ? <Music />    : null}
+                    {state.currentPage==='Game'     ? <Game />     : null}
+                    {state.currentPage==='Settings' ? <Settings /> : null}
+                    {state.currentPage==='About'    ? <About />    : null}
+                    {state.currentPage==='Songs'    ? <Songs state={state} /> : null}  
                 </div>
             </div>
-           
-    
+
+        </div>
       );
   }
 }

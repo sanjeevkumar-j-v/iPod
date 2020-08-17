@@ -1,34 +1,15 @@
 import React from 'react';
 
+
 class Home extends React.Component {
 
-   
   render () {
     return (
-        //    <div className="screen">
-        //         <div className="left">
-        //             <span style={{padding: 25, margin: 20}} > Ipod</span>
-        //             {this.props.state.currentList.map((item) => {
-        //                 if (this.props.state.activePos === this.props.state.currentList.indexOf(item) )
-        //                     return <li className='active'> {item} </li>
-        //                 else
-        //                     return <li > {item} </li>
-
-        //             })}
-        //         </div>
-        //         <div className="right">
-                    <div >
-                        {/* {this.props.state.activePos} */}
-                        {/* < FontAwesomeIcon icon={faHome} /> */}
-                        <div className="home-background"> 
-                          <img src="https://image.flaticon.com/icons/svg/2469/2469000.svg" alt='head-phones' />
-                        </div>
-                      
-                    </div>
-            //     </div>
-            // </div>
-           
-    
+      <div >
+          <div className="home-background"> 
+            <img src="https://image.flaticon.com/icons/svg/2469/2469000.svg" alt='head-phones' />
+          </div>
+      </div>
       );
   }
 }
