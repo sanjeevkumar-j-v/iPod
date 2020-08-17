@@ -13,7 +13,7 @@ const Music = ['Songs', 'Artists'];
 const Game = [], Settings = [], About = [];
 // List of song names
 const Songs = ['Eminem - Rap God', 'Imagine Dragons - Thunder', 'Luis Fonsi - Despacito ft. Daddy Yankee', 'Maroon 5 - Girls Like You ft. Cardi B', 'Sia - Cheap Thrills'];
-const Artists = ['Imagine dragons', 'Eminem', 'Luis Fonsi', 'Maroon 5', 'Sia'];
+const Artists = Songs;
 
 
 class App extends React.Component {
@@ -235,7 +235,7 @@ class App extends React.Component {
                         className="play" 
                         onClick={
                             // Calls the SelectMusic function only if the current page is Songs
-                            this.state.currentPage === 'Songs'
+                            this.state.currentPage === 'Songs' || this.state.currentPage === 'Artists'
                             ? this.SelectMusic
                             : this.changeListToNext
                         }>

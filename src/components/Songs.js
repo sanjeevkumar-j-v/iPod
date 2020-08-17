@@ -1,24 +1,26 @@
 import React from 'react';
 
 
-class Settings extends React.Component {
+class Songs extends React.Component {
    
   render () {
     const state = this.props.state;
     return (
       <div className="full-screen">
+          <div>Songs</div>
           <ul className='songs-list'>
             {state.currentList.map((item, index) => {
+              var songName = item.slice(item.indexOf('-')+2);
               if (state.activePos === index ) 
                   return <li className='active' key={index}> 
-                                {item} 
+                                {songName} 
                             </li>
               else if (state.song === item )
                   return <li className='playing ' key={index}> 
-                              {item} 
+                              {songName} 
                           </li>
               else
-                  return <li key={index} > {item} </li>
+                  return <li key={index} > {songName} </li>
             })}  
           </ul> 
       </div>
@@ -26,4 +28,4 @@ class Settings extends React.Component {
   }
 }
 
-export default Settings;
+export default Songs;

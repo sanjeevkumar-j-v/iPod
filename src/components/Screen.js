@@ -6,6 +6,7 @@ import Settings from './Settings';
 import Music from './Music';
 import About from './About';
 import Songs from './Songs';
+import Artists from './Artists';
 
 
 class Screen extends React.Component {
@@ -19,7 +20,7 @@ class Screen extends React.Component {
             <div className="left">
                 <div id='title' > iPod</div>
                 {state.currentList.map((item, index) => {
-                    if (state.currentPage==='Songs'){
+                    if (state.currentPage==='Songs' || state.currentPage==='Artists' ){
                         return null
                     }
                     if (state.activePos === index ) {
@@ -43,6 +44,7 @@ class Screen extends React.Component {
                     {state.currentPage==='Settings' ? <Settings /> : null}
                     {state.currentPage==='About'    ? <About />    : null}
                     {state.currentPage==='Songs'    ? <Songs state={state} /> : null}  
+                    {state.currentPage==='Artists'  ? <Artists state={state} /> : null}  
                 </div>
             </div>
 
