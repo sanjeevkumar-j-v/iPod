@@ -1,6 +1,10 @@
+body{
+    background-color: #06010f;
+    font-family: 'Amaranth', sans-serif;
+}
+
 .outer {
     background-color: rgb(179, 175, 175);
-    /* border: 2px solid black; */
     width: 280px;
     height: 204px;
     margin: 100px;
@@ -9,11 +13,10 @@
     align-content: center;
     align-items: center;
 }
+
 .inner {
     background-color: rgb(255, 255, 255);
-    /* border: 2px solid black; */
     border-radius: 0%;
-    /* margin-left: 40px; */
     width: 200px;
     height: 200px;
     display: flex;
@@ -21,19 +24,14 @@
     align-content: center;
     align-items: center;
 }
+
 .in-inner {
     background-color: rgb(179, 175, 175);
-    /* border: 2px solid black; */
     border-radius: 50%;
-    /* margin-left: 40px;
-    margin-top: 50px; */
     width: 90px;
     height: 90px;
 }
-body{
-    background-color: #06010f;
-    font-family: 'Amaranth', sans-serif;
-}
+
 .back-cover{
     width: 300px;
     height: 500px;
@@ -93,7 +91,6 @@ body{
 }
 .screen>div{
     width: 130px;
-    /* height: 200px; */
 }
 
 .screen li{
@@ -108,17 +105,6 @@ body{
 .screen li::-webkit-scrollbar {
     display: none;
 }
-/* {
-    background: orange;
-    height: 180px;
-    width: 400px;
-    margin: 10px -400px;
-    -webkit-animation-name: move;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: right;
-    -webkit-animation-timing-function: linear;
-} */
 
 .screen li:hover {
     animation-play-state: paused;
@@ -151,8 +137,7 @@ body{
 
 .screen img{
     width:260px;
-    height: 100%;
-    
+    height: 100%; 
 }
 
 .full-screen {
@@ -220,7 +205,7 @@ body{
     background: rgba(12, 5, 5, 0.555);
     margin: 10px auto;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.705);
+    border: 1px solid rgba(255, 255, 255, 0.705);
     transition-duration: 0.15s ;
     /*radius*/
     -webkit-border-radius: 100%;
@@ -234,7 +219,7 @@ body{
 
 #keys:hover{
     cursor: grab;
-    border: 2px solid rgba(15, 235, 235, 0.705);
+    border: 1px solid rgba(15, 235, 235, 0.705);
     -webkit-box-shadow: 0px 0px 22px 3px rgba(0,166,255,0.32);
     -moz-box-shadow: 0px 0px 22px 3px rgba(0,166,255,0.32);
     box-shadow: 0px 0px 22px 3px rgba(0,166,255,0.32);
@@ -243,7 +228,6 @@ body{
 #keys div:hover{
     cursor: pointer;
 }
-
 
 .menu-btn{
     display: block;
@@ -256,7 +240,7 @@ body{
     color: rgb(228, 226, 226);
     }
 
-    .menu-btn:hover{
+.menu-btn:hover{
     color: #00a6ff;
     /* duration / speed */
     -webkit-transition: all 0.2s;
@@ -274,7 +258,6 @@ body{
 }
 
 .fwd{  
-
     /*filter*/
     filter: grayscale(1);
         -webkit-filter: grayscale(1);
@@ -292,7 +275,6 @@ body{
 
 .fwd:hover{
     color: #00a6ff;
-
     /*filter*/
     filter: grayscale(0);
         -webkit-filter: grayscale(0);
@@ -333,7 +315,6 @@ body{
 
 .bkd:hover{
     color: #00a6ff;
-
     /*filter*/
     filter: grayscale(0);
         -webkit-filter: grayscale(0);
@@ -359,7 +340,6 @@ body{
             -ms-filter: grayscale(1);
 }
 
-
 .play-pause:hover{
     color: #00a6ff;
     /*filter*/
@@ -376,24 +356,24 @@ body{
     height: 90px;
     background-image: radial-gradient(circle, #000000, #1a1a1f,  #707073);
     margin: 54px auto;
-    border: 1.5px solid white;
+    border: 0.5px solid white;
     border-radius: 100%;
     position: absolute;
     top: 16px;
     left: 85px;
-    z-index: 200;
-    
+    z-index: 200;   
 }
 
 .play:hover {
     background-image: radial-gradient(circle, #000000, #1a1a1f,  #4bb4b4);
-    border: 1.5px solid rgb(0, 230, 199);
+    border: 0.5px solid rgb(0, 230, 199);
     cursor: pointer;
 }
 
 .home-background img  {
     width: 90px;
 }
+
 video {
     object-fit: cover;
     width: 100%;
@@ -402,5 +382,4 @@ video {
     top: 0;
     left: 0;
     z-index: 0;
-  }
-  
+}

@@ -8,9 +8,9 @@ import { faForward, faBackward, faPlay, faPause } from '@fortawesome/free-solid-
 import ZingTouch from 'zingtouch';
 
 // List items for each pages on screen
-const Home = ['Music' , 'Game' ,'Settings', 'About'];
+const Home = ['Music', 'Video' , 'Game' ,'Settings', 'About'];
 const Music = ['Songs', 'Artists'];
-const Game = [], Settings = [], About = [];
+const Video = [], Game = [], Settings = [], About = [];
 // List of song names
 const Songs = ['Eminem - Rap God', 'Imagine Dragons - Thunder', 'Luis Fonsi - Despacito ft. Daddy Yankee', 'Maroon 5 - Girls Like You ft. Cardi B', 'Sia - Cheap Thrills'];
 const Artists = Songs;
@@ -94,6 +94,13 @@ class App extends React.Component {
         var listAvailable = true;
         var list = [];
         let selectedItem = this.state.currentList[this.state.activePos];
+        if (selectedItem === 'Video'){
+            if (this.aud)
+                this.aud.pause();
+            this.setState({
+                play: false
+            });
+        }
         // Checks whether a list is available
         try {
             list = eval(selectedItem);
@@ -136,13 +143,15 @@ class App extends React.Component {
 
     // To play or pause the audio
     TogglePlayPauseMusic = () => {
-        this.aud = document.querySelector('audio');
-        if (!this.state.play) {
-            this.aud.play();
-            this.setState({ play: true });
-        } else {
-            this.aud.pause();
-            this.setState({ play: false });
+        if (this.state.currentPage !== 'Video'){
+            this.aud = document.querySelector('audio');
+            if (!this.state.play) {
+                this.aud.play();
+                this.setState({ play: true });
+            } else {
+                this.aud.pause();
+                this.setState({ play: false });
+            }
         }
     }
     // Plays the selected song
@@ -216,10 +225,10 @@ class App extends React.Component {
                             MENU
                         </div>
                         <div className="fwd">
-                            <FontAwesomeIcon icon={faForward} onClick={this.PlayNext}/>
+                            <FontAwesomeIcon icon={faForward} onClick={ this.currentPage !== 'Video' ?  this.PlayNext : null }/>
                         </div>
                         <div className="bkd">
-                            <FontAwesomeIcon icon={faBackward} onClick={this.PlayPrevious}/>       
+                            <FontAwesomeIcon icon={faBackward} onClick={ this.currentPage !== 'Video' ?  this.PlayPrevious : null }/>       
                         </div>
                         <div className="play-pause">
                             {/* Dynamically interchanges the play and pause icon */}

@@ -4,6 +4,7 @@ import Home from './Home';
 import Game from './Game'
 import Settings from './Settings';
 import Music from './Music';
+import Video from './Video';
 import About from './About';
 import Songs from './Songs';
 import Artists from './Artists';
@@ -40,6 +41,7 @@ class Screen extends React.Component {
                     {/* Displays the subcomponent of screen based on */}
                     {state.currentPage==='Home'     ? <Home />     : null}
                     {state.currentPage==='Music'    ? <Music />    : null}
+                    {state.currentPage==='Video'    ? <Video />    : null}
                     {state.currentPage==='Game'     ? <Game />     : null}
                     {state.currentPage==='Settings' ? <Settings /> : null}
                     {state.currentPage==='About'    ? <About />    : null}
